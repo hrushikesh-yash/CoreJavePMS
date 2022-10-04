@@ -6,21 +6,26 @@ import java.util.ArrayList;
 import com.yash.pms.entity.Product;
 
 public interface ProductManager {
-	public void addProduct(Product products);
+	
+	public boolean addProduct(Product products);
 
 	public void getAllProducts();
 
 	public int getProductByName(String productName);
 
-	public void updateProductsName(int productId, String item);
+	public boolean updateProductsName(int productId, String item);
 
-	public void updateProductsLocation(int productId, String item);
+	public boolean updateProductsLocation(int productId, String item);
 
-	public void updateProductQty(int productId, int item);
+	public boolean updateProductQty(int productId, int item);
 
-	public void updateProductPrice(int productId, int item);
+	public boolean updateProductPrice(int productId, int item);
 	
-//	public void updateProductDate(int productId, LocalDate item);
+	public boolean updateProductManifactreDate(int productId, LocalDate item);
 
-	public void DeleteProduct(int productId);
+	public boolean DeleteProduct(int productId);
+	
+	public boolean isProductListEmpty(ArrayList<Product> productList);
+	
+	public boolean isProductAlreadyExists(ArrayList<Product> productList, String productName);
 }

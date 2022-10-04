@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import com.yash.pms.entity.Product;
 import com.yash.pms.utils.utilities;
@@ -33,57 +34,64 @@ public class DriverClass extends utilities {
 				int productQty = input.nextInt();
 				System.out.println("Enter the Product price");
 				int productPrice = input.nextInt();
-				Product newProduct = new Product(productId++, productName, productLocation, productQty, productPrice,
-						(short) 0);
-				controller.addProducts(newProduct);
-				// System.out.println("Enter the Product mamifactutred Date");
-//				LocalDate productMfDate1 = null;
-//				try {
-//					
-//				LocalDate productMfDate1 = new SimpleDateFormat(dateFormat).parse(input.nextLine()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//					Product newProduct = new Product(productId++, productName, productLocation,productQty,productPrice,productMfDate1, (short) 0);
-////				Product newProduct = new Product(productId++, productName, productLocation,productQty,productPrice,productMfDate1, (short) 0);
-//				
-//				} catch (ParseException e) {
-//					// **To do
-//					// print the error using logger
-//					e.printStackTrace();
-//				}
+				
+				 System.out.println("Enter the Product mamifactutred Date in formta of dd/MM/yyyy");
+				try {
+				String productMfDateString=input.next();
+				DateTimeFormatter dateTimeFormat= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate productMfDate =LocalDate.parse(productMfDateString, dateTimeFormat); 
+					Product newProduct = new Product(productId++, productName, productLocation,productQty,productPrice,productMfDate, (short) 0);
+					controller.addProducts(newProduct);
+				} catch (Exception e) {
+					// **To do
+					
+					e.printStackTrace();
+				}
 
 				break;
 			case "update":
 				System.out.println("To update any things of the product enter the product name : ");
 				String productNameToUpdate = input.next();
-				System.out.println("What do you want to update");
-				updateChoice = input.next();
-				switch (updateChoice) {
-				case "name":
-					System.out.println("Enter new product Name");
-					controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
-					break;
-				case "location":
-					System.out.println("Enter new product location");
-					controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
-					break;
-				case "qty":
-					System.out.println("Enter new product QTY");
-					controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
-					break;
-				case "price":
-					System.out.println("Enter new product price");
-					controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
-					break;
-//						case "date":
-//							System.out.println("Enter new product manifactureing date");
-//							try {
-//								controller.UpdateProduct(productNameToUpdate, new SimpleDateFormat(dateFormat).parse(input.nextLine()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//							} catch (ParseException e) {
-//								// **To do
-//								e.printStackTrace();
-//							}
-//							break;
-				default:
-					break;
+				if(controller.isProductExists(productList, productNameToUpdate))
+				{
+					System.out.println("What do you want to update");
+					updateChoice = input.next();
+					switch (updateChoice) {
+					case "name":
+						System.out.println("Enter new product Name");
+						controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
+						break;
+					case "location":
+						System.out.println("Enter new product location");
+						controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
+						break;
+					case "qty":
+						System.out.println("Enter new product QTY");
+						controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
+						break;
+					case "price":
+						System.out.println("Enter new product price");
+						controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
+						break;
+							case "date":
+								System.out.println("Enter new product manifactureing date");
+								String productMfDateString=input.next();
+								DateTimeFormatter dateTimeFormat= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+								LocalDate productMfDate =LocalDate.parse(productMfDateString, dateTimeFormat); 
+								try {
+									controller.UpdateProduct(productNameToUpdate,productMfDate);
+								} catch (Exception e) {
+									// **To do
+									e.printStackTrace();
+								}
+								break;
+					default:
+						break;
+					}
+				}
+				else
+				{
+					System.out.println("Product Name : "+productNameToUpdate+" is not found in the records");
 				}
 				break;
 			case "delete":

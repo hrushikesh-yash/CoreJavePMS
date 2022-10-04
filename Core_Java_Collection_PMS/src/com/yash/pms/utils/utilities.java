@@ -14,12 +14,12 @@ public class utilities {
 	public static int productId=1;
 	public static Scanner input= new Scanner(System.in);
 	
-	protected ArrayList<Product> productList= new ArrayList<Product>();
+	protected static ArrayList<Product> productList= new ArrayList<Product>();
 	protected static String dateFormat = "dd/MM/yyyy";
 	
 	
 	// Objects
 	protected static ProductController controller= new ProductController();
 	protected static ProductManagerImpl service = new ProductManagerImpl();
-//	protected static ProductManager service1 = new ProductManager();
+
 }

@@ -10,7 +10,7 @@ public class Product {
 	private String storageLocation;
 	private int qty;
 	private int price;
-//	private LocalDate manifactureDate;
+	private LocalDate manifactureDate;
 	private short isProductDeleted;
 	
 	public Product()
@@ -20,14 +20,14 @@ public class Product {
 	
 
 	public Product(int productId, String productName, String storageLocation, int qty, int price,
-			 short isProductDeleted) {
+			 LocalDate manifactureDate,short isProductDeleted) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.storageLocation = storageLocation;
 		this.qty = qty;
 		this.price = price;
-//		this.manifactureDate = manifactureDate;
+		this.manifactureDate = manifactureDate;
 		this.isProductDeleted = isProductDeleted;
 	}
 
@@ -78,13 +78,13 @@ public class Product {
 		this.price = price;
 	}
 
-//	public LocalDate getManifactureDate() {
-//		return manifactureDate;
-//	}
-//
-//	public void setManifactureDate(LocalDate manifactureDate) {
-//		this.manifactureDate = manifactureDate;
-//	}
+	public LocalDate getManifactureDate() {
+		return manifactureDate;
+	}
+
+	public void setManifactureDate(LocalDate manifactureDate) {
+		this.manifactureDate = manifactureDate;
+	}
 
 	public short getIsProductDeleted() {
 		return isProductDeleted;
