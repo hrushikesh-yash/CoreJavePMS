@@ -3,6 +3,7 @@ package com.yash.pms.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import com.yash.pms.entity.Product;
 import com.yash.pms.utils.utilities;
@@ -44,6 +45,7 @@ public class ProductManagerImpl extends utilities implements ProductManager {
 
 		for (int i = 0; i < productList.size(); i++) {
 			if (productList.get(i).getProductName().equalsIgnoreCase(productName)) {
+				 System.out.println(" Checking :: "+productList.get(i).getProductName()+" With: "+productName);
 				return productList.get(i).getProductId();
 			}
 		}
@@ -56,7 +58,9 @@ public class ProductManagerImpl extends utilities implements ProductManager {
 		if (!isProductListEmpty(productList)) {
 			for (int i = 0; i < productList.size(); i++) {
 				if (productList.get(i).getProductId() == productId) {
-					productList.get(i).setIsProductDeleted((short) 1);
+					System.out.println("Deleting Product name : "+productList.get(i).getProductName());
+					System.out.println("Deleting Product Name : "+productList.get(i).getProductId());
+					productList.remove(productList.get(i));
 					return true;
 				}
 			}
@@ -135,7 +139,7 @@ public class ProductManagerImpl extends utilities implements ProductManager {
 	}
 
 	@Override
-	public boolean isProductListEmpty(ArrayList<Product> productList) {
+	public boolean isProductListEmpty(LinkedList<Product> productList) {
 
 		if (productList.isEmpty()) {
 			return true;
@@ -144,7 +148,7 @@ public class ProductManagerImpl extends utilities implements ProductManager {
 
 	}
 
-	public boolean isProductAlreadyExists(ArrayList<Product> productList, String productName) {
+	public boolean isProductAlreadyExists(LinkedList<Product> productList, String productName) {
 		if (!isProductListEmpty(productList)) {
 			for (int i = 0; i < productList.size(); i++) {
 				if (productList.get(i).getProductName().contains(productName)) {

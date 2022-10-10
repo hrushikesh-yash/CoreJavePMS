@@ -2,6 +2,7 @@ package com.yash.pms.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.yash.pms.entity.Product;
 import com.yash.pms.utils.utilities;
@@ -84,9 +85,9 @@ public class ProductController extends utilities {
 		}
 	}
 	
-	public boolean isProductExists(ArrayList<Product> product,String productname)
+	public boolean isProductExists(LinkedList<Product> productList,String productname)
 	{
-		if(service.isProductAlreadyExists(product, productname))
+		if(service.isProductAlreadyExists(productList, productname))
 		{
 			return true;
 		}

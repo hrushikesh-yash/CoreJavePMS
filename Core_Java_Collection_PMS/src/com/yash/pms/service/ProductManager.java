@@ -2,6 +2,7 @@ package com.yash.pms.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.yash.pms.entity.Product;
 
@@ -25,7 +26,7 @@ public interface ProductManager {
 
 	public boolean DeleteProduct(int productId);
 	
-	public boolean isProductListEmpty(ArrayList<Product> productList);
+	public boolean isProductListEmpty(LinkedList<Product> productList);
 	
-	public boolean isProductAlreadyExists(ArrayList<Product> productList, String productName);
+	public boolean isProductAlreadyExists(LinkedList<Product> productList, String productName);
 }

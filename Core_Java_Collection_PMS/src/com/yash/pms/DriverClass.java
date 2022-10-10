@@ -22,10 +22,10 @@ public class DriverClass extends utilities {
 		System.out.println("5.Search by Product Name");
 		System.out.println();
 
-		choice = input.next();
+		choice = input.nextInt();
 		
 			switch (choice) {
-			case ("add"):
+			case (1):
 				System.out.println("Enter the Product Name");
 				String productName = input.next();
 				System.out.println("Enter the Product Storage Location");
@@ -49,42 +49,47 @@ public class DriverClass extends utilities {
 				}
 
 				break;
-			case "update":
+			case 2:
 				System.out.println("To update any things of the product enter the product name : ");
 				String productNameToUpdate = input.next();
 				if(controller.isProductExists(productList, productNameToUpdate))
 				{
 					System.out.println("What do you want to update");
-					updateChoice = input.next();
+					System.out.println("1.Name");
+					System.out.println("2.Location");
+					System.out.println("3.Quantity");
+					System.out.println("4.Price ");
+					System.out.println("5.Manifacture Date");
+					updateChoice = input.nextInt();
 					switch (updateChoice) {
-					case "name":
+					case 1:
 						System.out.println("Enter new product Name");
-						controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
+						controller.UpdateProduct(productNameToUpdate, input.next(), "name");
 						break;
-					case "location":
+					case 2:
 						System.out.println("Enter new product location");
-						controller.UpdateProduct(productNameToUpdate, input.next(), updateChoice);
+						controller.UpdateProduct(productNameToUpdate, input.next(), "location");
 						break;
-					case "qty":
+					case 3:
 						System.out.println("Enter new product QTY");
-						controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
+						controller.UpdateProduct(productNameToUpdate, input.nextInt(), "qty");
 						break;
-					case "price":
+					case 4:
 						System.out.println("Enter new product price");
-						controller.UpdateProduct(productNameToUpdate, input.nextInt(), updateChoice);
+						controller.UpdateProduct(productNameToUpdate, input.nextInt(), "price");
 						break;
-							case "date":
-								System.out.println("Enter new product manifactureing date");
-								String productMfDateString=input.next();
-								DateTimeFormatter dateTimeFormat= DateTimeFormatter.ofPattern("dd/MM/yyyy");
-								LocalDate productMfDate =LocalDate.parse(productMfDateString, dateTimeFormat); 
-								try {
-									controller.UpdateProduct(productNameToUpdate,productMfDate);
-								} catch (Exception e) {
-									// **To do
-									e.printStackTrace();
-								}
-								break;
+					case 5:
+						System.out.println("Enter new product manifactureing date");
+						String productMfDateString=input.next();
+						DateTimeFormatter dateTimeFormat= DateTimeFormatter.ofPattern("dd/MM/yyyy");
+						LocalDate productMfDate =LocalDate.parse(productMfDateString, dateTimeFormat); 
+						try {
+							controller.UpdateProduct(productNameToUpdate,productMfDate);
+						} catch (Exception e) {
+							// **To do
+							e.printStackTrace();
+						}
+						break;
 					default:
 						break;
 					}
@@ -94,12 +99,12 @@ public class DriverClass extends utilities {
 					System.out.println("Product Name : "+productNameToUpdate+" is not found in the records");
 				}
 				break;
-			case "delete":
+			case 3:
 				System.out.println("To delete product enter the product name : ");
 				String productNameToDelete = input.next();
 				controller.DeleteProduct(productNameToDelete);
 				break;
-			case "view":
+			case 4:
 				controller.getAllProducts();
 				break;
 			default:
